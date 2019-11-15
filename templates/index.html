@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Ghost Name Picker</title>
+    <script type="text/js" src="{{ url_for('static', filename='script.js') }}"></script>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <section class="header"></section>
+    <h1>Boo!</h1>
+    <button id="get-ghost-name-btn" value="">Get a Phantom name</button>
+    <h2>Ghosts Named</h2>
+    <table border=1 frame=void rules=rows>
+        {% for name in names %}
+        <tr>
+            <td>{{ name.first + ' "' + name.ghost + '" ' + name.last }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBHabb7z9nFQh1u1uvL7Rt_7yjg75rMHTU",
+            authDomain: "ghost-namer.firebaseapp.com",
+            databaseURL: "https://ghost-namer.firebaseio.com",
+            projectId: "ghost-namer",
+            storageBucket: "ghost-namer.appspot.com",
+            messagingSenderId: "823505372321",
+            appId: "1:823505372321:web:78dd467bc1e19579631ce0"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+</body>
+
+</html>
