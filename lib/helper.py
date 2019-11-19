@@ -43,7 +43,7 @@ def delete_user(user):
         CLIENT.put(ghost_entity)
 
 
-def fetch_latest_users(limit):
+def fetch_latest_users(limit=10):
     """
     Fetches the n latest users from the datastore.
 

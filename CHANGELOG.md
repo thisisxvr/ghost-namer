@@ -10,4 +10,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ghost-namer app base functionality
 
 
-[0.1.0]: 
+[0.1.0]: https://github.com/thisisxvr/ghost-namer/commit/76b5b8b0f4b20b1a7781a1f4aa90d66d4000671d
