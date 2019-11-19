@@ -1,6 +1,7 @@
 """
 Helper function library.
 """
+
 import csv
 import datetime
 from google.cloud import datastore
@@ -27,7 +28,7 @@ def delete_user(user):
     Deletes the given user Entity from the datastore.
 
     Args:
-        user: User to be deleted.
+        user: User Entity to be deleted.
     """
 
     # Update ghost entity

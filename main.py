@@ -1,4 +1,6 @@
-""" Entry point for ghost-namer app. """
+"""
+Entry point for ghost-namer app.
+"""
 
 # [START gae_python37_render_template]
 import datetime
@@ -15,6 +17,7 @@ import lib.helper as lib
 app = Flask(__name__)
 app.config.from_object('config')
 CLIENT = datastore.Client()
+FIREBASE_API_KEY = app.config.get('FIREBASE_API_KEY')
 FIREBASE_REQUEST_ADAPTER = requests.Request()
 
 REDIS_HOST = app.config.get('REDIS_HOST')
@@ -63,7 +66,7 @@ def root(**kwargs):
 def auth():
     """ Returns the authetication page. """
 
-    return render_template('auth.html')
+    return render_template('auth.html', api_key=FIREBASE_API_KEY)
 
 
 @app.route('/form')
@@ -119,7 +122,7 @@ def ghost_name_results():
     ghost_entities = list(query.fetch())
 
     if len(ghost_entities) < 3:
-        # Uh oh. We've run out of ghosts...😞
+        # Uh oh. We've run out of ghosts... 😞
         # No worries, rinse and repeat.
         lib.flush_data()
         lib.seed_data()
