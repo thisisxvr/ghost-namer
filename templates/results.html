@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Pick a Ghost Name</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/dropdown_selector.js') }}"></script>
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+  {% if ghosts %}
+  <div class="wrapper typo">
+    {{ first_name }} "
+    <div class="list">
+      <span class="placeholder">select-a-ghost-name</span>
+      <ul class="list__ul">
+        {% for ghost in ghosts %}
+        <li><a value="{{ ghost['id'] }}">{{ ghost['name'] }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    " {{ last_name }}
+    <br><br>
+    {% for ghost in ghosts %}
+    <div id="ghost-decription-div">
+      <span class="ghost-description-span" value="{{ ghost['id'] }}" style="display: none;"><b>{{ ghost['name'] }}
+        </b>{{ ghost['description'] }}</span>
+    </div>
+    {% endfor %}
+  </div>
+
+  <form id="ghost-name-form" method="POST" action="/store">
+    <input name="user-first-name" style="display: none;" value="{{ first_name }}">
+    <input name="user-last-name" style="display: none;" value="{{ last_name }}">
+    <input name="selected-ghost-id" style="display: none;">
+    <input name="selected-ghost-name" style="display: none;">
+
+    <div class="button-sticky">
+      <input id="ghost-name-submit-btn" type="submit" value="➤">
+    </div>
+  </form>
+  </div>
+  {% endif %}
+
+  {% if error_message %}
+  <p>Error: {{ error_message }}</p>
+  {% endif %}
+</body>
+
+</html>

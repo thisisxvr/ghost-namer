@@ -1,40 +1,46 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>Ghost Name Picker</title>
-    <script type="text/js" src="{{ url_for('static', filename='script.js') }}"></script>
-    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ghost Name Picker</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
-    <section class="header"></section>
-    <h1>Boo!</h1>
-    <button id="get-ghost-name-btn" value="">Get a Phantom name</button>
-    <h2>Ghosts Named</h2>
-    <table border=1 frame=void rules=rows>
-        {% for name in names %}
-        <tr>
-            <td>{{ name.first + ' "' + name.ghost + '" ' + name.last }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+  <section class="header">
+    <img id="ghost" src="{{ url_for('static', filename='img/ghost.svg') }}" class="bounce" alt="ghost-logo">
+  </section>
 
-    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
-    <script>
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyBHabb7z9nFQh1u1uvL7Rt_7yjg75rMHTU",
-            authDomain: "ghost-namer.firebaseapp.com",
-            databaseURL: "https://ghost-namer.firebaseio.com",
-            projectId: "ghost-namer",
-            storageBucket: "ghost-namer.appspot.com",
-            messagingSenderId: "823505372321",
-            appId: "1:823505372321:web:78dd467bc1e19579631ce0"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-    </script>
+  {% if user_data %}
+  <h1>Welcome back, {{ user_data['first_name'] + ' "' + user_data['ghost_name'] + '" ' + user_data['last_name'] }}
+  </h1>
+  <button id="get-ghost-name-btn" type="button"
+    onclick="window.location.href='{{ url_for( 'ghost_name_results' ) }}';">Change your Phantom name</button>
+  {% else %}
+  <h1>Boo!</h1>
+  <button id="get-ghost-name-btn" type="button" onclick="window.location.href='{{ url_for( 'auth' ) }}';">Get your
+    Phantom name</button>
+  {% endif %}
+
+  {% if users %}
+  <h3 id="ghosts-named-head">Ghosts Named</h3>
+  <table border=1 frame=void rules=rows>
+    {% for user in users %}
+    <tr>
+      <td>
+        {{ user['first_name'] + " " + user['last_name'] + ' aka "' + user['ghost_name'] + '"'  + ' (' + user['email'] + ')'}}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+
+  {% if error_message %}
+  <p>Error: {{ error_message }}</p>
+  {% endif %}
 </body>
 
 </html>

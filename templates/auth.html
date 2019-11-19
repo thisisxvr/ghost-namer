@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login</title>
+
+  <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-analytics.js"></script>
+
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyB2fypY9lvev0OzAxh0mLknW7UvoVEQoTI",
+      authDomain: "strange-sun-258602.firebaseapp.com",
+      databaseURL: "https://strange-sun-258602.firebaseio.com",
+      projectId: "strange-sun-258602",
+      storageBucket: "strange-sun-258602.appspot.com",
+      messagingSenderId: "557601614871",
+      appId: "1:557601614871:web:c8f8a7e06ea8b3dd5cc052",
+      measurementId: "G-X6L3Z0K22G"
+    };
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+  <script>
+    if (typeof firebase === 'undefined') {
+      const msg = "Please paste the Firebase initialization snippet into index.html. See https://console.firebase.google.com > Overview > Add Firebase to your web app.";
+      console.log(msg);
+      alert(msg);
+    }
+  </script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.js"></script>
+  <link rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.css">
+  <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+  <h1>Sign in</h1>
+
+  <div id="firebaseui-auth-container"></div>
+  <button id="sign-out" hidden=true>Sign Out</button>
+  <div id="login-info" hidden=true></div>
+</body>
+
+</html>

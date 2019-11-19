@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login</title>
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+  <h1>What's your name?</h1>
+  <form id="user-name-form" method="POST" action="/results">
+    <input type="text" name="user-first-name" class="user-names-input" placeholder="First name" pattern="^[a-zA-Z'-]+$"
+      required>
+    <input type="text" name="user-last-name" class="user-names-input" placeholder="Last name" pattern="^[a-zA-Z'-]+$"
+      required><br>
+    <div class="button-sticky">
+      <input id="user-name-submit-btn" type="submit" value="➤">
+    </div>
+  </form>
+</body>
+
+</html>
