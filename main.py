@@ -32,7 +32,6 @@ Session(app)
 def root(**kwargs):
     """ Returns the overview page. """
 
-    claims = None
     user_entity = None
     error_message = kwargs.get('error_message')
     id_token = request.cookies.get("token")
@@ -46,16 +45,16 @@ def root(**kwargs):
         except ValueError as exc:
             error_message = str(exc)
 
-    if claims:
-        user_entities = list(lib.fetch_user(claims['email']))
+        if claims:
+            user_entities = list(lib.fetch_user(claims['email']))
 
-        if len(user_entities) > 0:
-            user_entity = user_entities.pop(0)
-            session['email'] = user_entity['email']
-            session['first_name'] = user_entity['first_name']
-            session['last_name'] = user_entity['last_name']
-        else:
-            error_message = 'User logged in but not found in datastore.'
+            if len(user_entities) > 0:
+                user_entity = user_entities.pop(0)
+                session['email'] = user_entity['email']
+                session['first_name'] = user_entity['first_name']
+                session['last_name'] = user_entity['last_name']
+            else:
+                error_message = 'User logged in but not found in datastore.'
 
     return render_template('index.html', user_data=user_entity,
                            error_message=error_message,
@@ -83,7 +82,8 @@ def user_name_form():
         except ValueError as exc:
             error_message = str(exc)
 
-        email = claims['email']
+        if claims:
+            email = claims['email']
 
     if not email:
         error_message = 'User not logged in.'
